@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="en">
-<!--<![endif]-->
 
 <head>
 	<meta charset="utf-8">
@@ -186,11 +185,24 @@
 			});
 		});
 		$("#category_image").change((event) => {
-
-			
-			$("#blah").show()
+			blah.src = ''
+			var allowedExtensions =  /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+			if (!allowedExtensions.exec($("#category_image").val())) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please Select Vaild File!',
+				})
+				$("#category_image").val('')
+                return false;
+            } else{
+              $("#blah").show()
 			blah.src = URL.createObjectURL(event.target.files[0]);
+			}
 		})
+
+
+
 	</script>
 </body>
 </html>
