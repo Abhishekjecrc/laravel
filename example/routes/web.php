@@ -25,10 +25,6 @@ Route::get('/header', function () {
 });
 
 
-
-
-
-
 Route::get('/admin', function () {
     return view('admin');
 });

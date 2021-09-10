@@ -10,5 +10,4 @@ class catrgory extends Model
     use HasFactory;
     protected $table = 'subcategory';
     
-
 }

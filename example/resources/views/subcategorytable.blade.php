@@ -59,7 +59,6 @@
             }
         })
     })
-
     function edit(name, id) {
         $("#Edit_category_name").val(name)
         $("#edit_category_id").val(id)
