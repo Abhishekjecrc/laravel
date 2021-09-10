@@ -8,5 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class catrgory extends Model
 {
     use HasFactory;
-    public $timestamps = false;
+    protected $table = 'subcategory';
+    
+
 }
