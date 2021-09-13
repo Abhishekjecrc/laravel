@@ -12,7 +12,11 @@
     @else
     <td class="row-data"><button type="button" id="status" value={{$category->status."_".$category->id}} class=" btn status btn-danger btn-rounded waves-effect">Inactive</button></td>
     @endif
-    <td><button type="button" id="edit" onclick="edit('{{$category->sub_category_name}}','{{$category->id}}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class=" btn edit btn-primary btn-rounded waves-effect"><i class="fa fa-pencil-square-o"></i></button></td>
+    <td>
+        <button type="button" id="edit" onclick="edit('{{$category->sub_category_name}}','{{$category->id}}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class=" btn edit btn-primary btn-rounded waves-effect"><i class="fa fa-pencil-square-o"></i></button>
+        <button type="button" id="delete" onclick="SubcategoryDelete('{{$category->id}}')" data-bs-toggle="modal" data-bs-target="#subcategorydelete" class=" btn edit btn-danger btn-rounded waves-effect"><i class="fa fa-trash-o"></i></button>
+       
+    </td>
 </tr>
 @endforeach
 
@@ -62,5 +66,9 @@
     function edit(name, id) {
         $("#Edit_category_name").val(name)
         $("#edit_category_id").val(id)
+    }
+
+    function SubcategoryDelete( id) {
+        $("#deleteid").val(id)
     }
 </script> 

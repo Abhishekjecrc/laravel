@@ -113,7 +113,38 @@
 			</div>
 		</div>
 	</div>
+
+
+	<!-- Delete -->
+
+	<div class="modal fade" id="Delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Category Delete</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form_delete" method="" enctype="multipart/form-data">
+
+						<div class="mb-3">
+							<label for="Edit_category_name" class="col-form-label">Remark:</label>
+							<input type="text" class="form-control" name="remark" id="remark">
+						</div>
+						
+						<input type="hidden" value="" name="delete_category_id" id="delete_category_id">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" id="delete" class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
+				</div>
+			</div>
+		</div>
 	</div>
+
+
+	
 	@include('scrpit')
 
 	<script>
@@ -187,7 +218,7 @@
 				contentType: false,
 				processData: false,
 				success: function(result) {
-					//console.log(result);
+				
 				}
 			});
 		});
@@ -206,6 +237,23 @@
               $("#blah").show()
 			blah.src = URL.createObjectURL(event.target.files[0]);
 			}
+		})
+
+		$("#delete").click(()=>{
+	            var formdata = new FormData($("#form_delete")[0]);
+
+				console.log(formdata)
+				$.ajax({
+				url: "{{ url('/edit2') }}",
+				method: 'get',
+				data: formdata,
+				contentType: false,
+				processData: false,
+				success: function(result) {
+					
+				}
+			});
+
 		})
 	</script>
 </body>

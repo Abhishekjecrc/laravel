@@ -10,7 +10,10 @@
     @else
     <td class="row-data"><button type="button" id="status" value={{$category->status."_".$category->id}} class=" btn status btn-danger btn-rounded waves-effect">Inactive</button></td>
     @endif
-    <td><button type="button" id="edit" onclick="edit('{{$category->categoryname}}','{{$category->id}}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class=" btn edit btn-primary btn-rounded waves-effect"><i class="fa fa-pencil-square-o"></i></button></td>
+    <td><button type="button" id="edit" onclick="edit('{{$category->categoryname}}','{{$category->id}}')" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class=" btn edit btn-primary btn-rounded waves-effect"><i class="fa fa-pencil-square-o"></i></button>
+    
+    <button type="button" id="delete" onclick="catDelete('{{$category->id}}')" data-bs-toggle="modal" data-bs-target="#Delete" class=" btn edit btn-primary btn-danger waves-effect"><i class="fa fa-trash-o"></i></button>
+</td>
 </tr>
 @endforeach
 
@@ -61,5 +64,8 @@
     function edit(name, id) {
         $("#Edit_category_name").val(name)
         $("#edit_category_id").val(id)
+    }
+    function catDelete(id){
+         $("#delete_category_id").val(id)
     }
 </script>

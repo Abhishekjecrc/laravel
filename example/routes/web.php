@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\productdetails;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,6 +36,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('ajaxRequest', [CategoryController::class, 'ajaxRequest']);
 Route::get('/status', [CategoryController::class, 'ajaxRequestStatus']);
 Route::POST('/edit',[CategoryController::class,'ajaxEdit']);
+Route::get('/edit2',[CategoryController::class,'ajaxDelete']);
 Route::POST('/insert',[CategoryController::class,'ajaxInsert']);
 
 
@@ -42,3 +44,19 @@ Route::POST('/insert',[CategoryController::class,'ajaxInsert']);
 
 Route::get('/subcategory', [SubCategoryController::class, 'data']);
 Route::get('tableData', [SubCategoryController::class, 'tableData']);
+Route ::post('/deleteSubcategory',[SubCategoryController::class,'DeleteCategory']);
+
+
+
+
+Route :: get('/form', function(){
+     return view('form');
+});
+
+
+Route :: get('/adddetails', function(){
+    return view('adddetails');
+});
+
+
+Route ::POST('/adddata',[productdetails::class,'formsubmit']);

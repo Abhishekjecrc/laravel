@@ -54,6 +54,7 @@ class CategoryController extends Controller
                  $id= $catrgory->id;
 
 
+                 
                 $filename = $file->getClientOriginalName();
                
                $path= "public/image/".$id."/demo.".$file->getClientOriginalExtension();
@@ -62,5 +63,13 @@ class CategoryController extends Controller
                
                 $req->file('image')->storeAs("public/image/".$id,"demo.".$file->getClientOriginalExtension());
                
+        }
+
+
+        public function ajaxdelete(Request $req)
+        {
+               
+                echo $req['delete_category_id'];
+                die;           
         }
 }

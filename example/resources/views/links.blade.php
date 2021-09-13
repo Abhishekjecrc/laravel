@@ -9,4 +9,4 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" crossorigin="anonymous" />
-<link rel="stylesheet" href="sweetalert2.min.css">
+<!-- <link rel="stylesheet" href="sweetalert2.min.css"> -->
