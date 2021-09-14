@@ -36,7 +36,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('ajaxRequest', [CategoryController::class, 'ajaxRequest']);
 Route::get('/status', [CategoryController::class, 'ajaxRequestStatus']);
 Route::POST('/edit',[CategoryController::class,'ajaxEdit']);
-Route::get('/edit2',[CategoryController::class,'ajaxDelete']);
+Route::POST('/edit2',[CategoryController::class,'ajaxDelete']);
 Route::POST('/insert',[CategoryController::class,'ajaxInsert']);
 
 
@@ -45,6 +45,8 @@ Route::POST('/insert',[CategoryController::class,'ajaxInsert']);
 Route::get('/subcategory', [SubCategoryController::class, 'data']);
 Route::get('tableData', [SubCategoryController::class, 'tableData']);
 Route ::post('/deleteSubcategory',[SubCategoryController::class,'DeleteCategory']);
+Route ::POST('/insertsubcategory',[SubCategoryController :: class,'addSubCategory']);
+Route ::GET('/subcategorystatus',[SubCategoryController :: class,'ajaxstatus']);
 
 
 
@@ -54,9 +56,7 @@ Route :: get('/form', function(){
 });
 
 
-Route :: get('/adddetails', function(){
-    return view('adddetails');
-});
+Route :: get('/adddetails', [productdetails :: class,'getdetails']);
 
 
 Route ::POST('/adddata',[productdetails::class,'formsubmit']);

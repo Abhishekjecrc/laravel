@@ -34,78 +34,83 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>Name : </label>
-                                        <input type="text" name="name" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('name'){{$message}}@enderror </span>                                 
-                                        
+                                        <input type="text" name="name" class="form-control" placeholder="Enter Product Name" autocomplete="off">
+                                        <span style="color:red">@error('name'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Brand : </label>
-                                        <input type="text" name="brand" class="form-control" placeholder="Enter brand Name" />
-                                        <span style="color:red">@error('brand'){{$message}}@enderror </span>                                 
-                                        
+                                        <input type="text" name="brand" class="form-control" placeholder="Enter brand Name" autocomplete="off" />
+                                        <span style="color:red">@error('brand'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Model :</label>
-                                        <input type="text"  name="model" class="form-control" placeholder="Enter Model" />
-                                        <span style="color:red">@error('model'){{$message}}@enderror </span>                                 
-                                        
+                                        <input type="text" name="model" class="form-control" placeholder="Enter Model" autocomplete="off" />
+                                        <span style="color:red">@error('model'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Category :</label>
-                                        <input type="text" name="category" placeholder="Enter the Category" class="form-control" />
-                                        <span style="color:red">@error('category'){{$message}}@enderror </span>                                 
-                                       
+                                        <select name="category" class="form-control">
+                                            <option selected disabled>Select Category</option>
+                                            @foreach($category as $getcategory)
+                                            <option value={{$getcategory->id}}>{{$getcategory->categoryname}}</option>
+                                            @endforeach
+                                        </select>
+                                        <span style="color:red">@error('category'){{$message}}@enderror </span>
                                     </div>
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>Gender : </label>
-                                        <input type="text" name="gender"class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('gender'){{$message}}@enderror </span>                                 
-                                       
+                                        <select name="gender" class="form-control">
+                                            <option selected disabled>Select Gender</option>
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                        <span style="color:red">@error('gender'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Size Group : </label>
-                                        <input type="text" name="size_group" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('gender'){{$message}}@enderror </span>                                 
-                                      
+                                        <select name="size_group" class="form-control">
+                                         <option selected disabled>Select Size</option>
+                                        
+                                        </select>
+                                         
+                                        <span style="color:red">@error('gender'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Color : </label>
-                                        <input type="text"  name="color" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('color'){{$message}}@enderror </span>                                 
+                                        <input type="text" name="color" class="form-control" placeholder="Enter Product Color" autocomplete="off">
+                                        <span style="color:red">@error('color'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>SKU : </label>
-                                        <input type="text" name="sku" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('sku'){{$message}}@enderror </span>                                 
-
+                                        <input type="text" name="sku" class="form-control" placeholder="Enter Product SKU" autocomplete="off">
+                                        <span style="color:red">@error('sku'){{$message}}@enderror </span>
                                     </div>
                                 </div>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>Relase Price (USD) : </label>
-                                        <input type="text" name="relase_price_usd" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('relase_price_usd'){{$message}}@enderror </span>                                 
-
+                                        <input type="Number" name="relase_price_usd" class="form-control" placeholder="Enter Product Relase Price" autocomplete="off">
+                                        <span style="color:red">@error('relase_price_usd'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Relase Price (INR) : </label>
-                                        <input type="text" name="relase_price_inr" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('relase_price_inr'){{$message}}@enderror </span>                                     
+                                        <input type="Number" name="relase_price_inr" class="form-control" placeholder="Enter Product Prices" autocomplete="off">
+                                        <span style="color:red">@error('relase_price_inr'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Relase Date : </label>
-                                        <input type="text" name="relase_date" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('relase_date'){{$message}}@enderror </span>                                 
-                                         
+                                        <input type="Date" name="relase_date" class="form-control" placeholder="Enter Product Name" autocomplete="off">
+                                        <span style="color:red">@error('relase_date'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Description : </label>
-                                        <input type="text" name="description" class="form-control" placeholder="Enter Product Name">
-                                        <span style="color:red">@error('description'){{$message}}@enderror </span>                                 
+                                        <input type="text" name="description" class="form-control" placeholder="Enter Product Description" autocomplete="off">
+                                        <span style="color:red">@error('description'){{$message}}@enderror </span>
                                     </div>
                                 </div>
                                 <br>
@@ -122,6 +127,5 @@
             </div><!-- .animated -->
         </div>
         @include('scrpit')
-
 </body>
 </html>

@@ -25,7 +25,7 @@
 								<strong class="card-title">Sub Category</strong>
 							</div>
 							<div class="col-lg-3 ">
-								<button class="btn btn-success" id="add_category" data-bs-toggle="modal" data-bs-target="#addCategory"><i class="fa  fa-plus"></i>  Add Sub Category </button>
+								<button class="btn btn-success" id="add_category" data-bs-toggle="modal" data-bs-target="#addCategory"><i class="fa  fa-plus"></i> Add Sub Category </button>
 							</div>
 						</div>
 						<div class="card-body">
@@ -53,7 +53,7 @@
 
 
 	<!-- Add Model -->
-   
+
 	<div class="modal fade" id="addCategory" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -63,15 +63,16 @@
 				</div>
 				<div class="modal-body">
 					<form id="form_add" method="" enctype="multipart/form-data">
-                    <div class="mb-3">
+						<div class="mb-3">
 							<label for="category-name" class="col-form-label">Select Category </label>
 							<select class="form-control" id="fetch_category" name="fetch_category">
+								<option selected disabled>Select Category</option>
 								@foreach ($category as $category)
-                              <option value="{{ $category->id }}">{{$category->categoryname}}</option>
-                                @endforeach
-                            </select>
-						</div>     
-                    
+								<option value="{{ $category->id }}">{{$category->categoryname}}</option>
+								@endforeach
+							</select>
+						</div>
+
 						<div class="mb-3">
 							<label for="category-name" class="col-form-label">Sub Category Name:</label>
 							<input type="text" class="form-control" name="category-name" id="category-name">
@@ -94,7 +95,7 @@
 	<!-- Add categroy MODEl END -->
 
 	<!-- Delete  -->
-      
+
 	<div class="modal fade" id="subcategorydelete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -104,13 +105,13 @@
 				</div>
 				<div class="modal-body">
 					<form id="form_delete" method="" enctype="multipart/form-data">
-                      
-                    
+
+
 						<div class="mb-3">
-							<label for="category-name" class="col-form-label">Remark:</label>
-							<input type="text" class="form-control" name="category-name" id="category-name">
+							<label for="category_remak" class="col-form-label">Remark:</label>
+							<input type="text" class="form-control" name="category_remak" id="category_remak">
 						</div>
-						<input type="hidden" value=""  id="deleteid">
+						<input type="hidden" value="" id="deleteid">
 					</form>
 				</div>
 				<div class="modal-footer">
@@ -170,30 +171,88 @@
 				success: function(result) {
 					$("tbody").html(result)
 				},
-                error:function(data){
+				error: function(data) {
 					$("tbody").html("Error")
-                }
+				}
 			});
 		})
 
-		$("#subcatdelete").click(()=>{
-			console.log("Hello");
-             var fordata =  new FormData($("#form_delete")[0])  
-			 $.ajax({
-				 url :"{{url('/deleteSubcategory')}}",
-				 method:'POST',
-				 data: fordata,
+		$("#subcatdelete").click(() => {
+			var fordata = new FormData($("#form_delete")[0])
+			$.ajax({
+				url: "{{url('/deleteSubcategory')}}",
+				method: 'POST',
+				data: fordata,
 				contentType: false,
 				processData: false,
 				success: function(result) {
 					console.log("Suss")
 				},
-                error:function(data){
+				error: function(data) {
 					console.log("eror")
-                }
-			 })         
+				}
+			})
 		})
 
+		$("#insert").click(() => {
+			if (($("#category-name").val() === '') || ($("#category_image").get(0).files.length === 0) || ($("#fetch_category").val() === null)) {
+
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please Insert All Feild!',
+				})
+			} else {
+				$("#addCategory").modal('hide');
+				var formData = new FormData($("#form_add")[0]);
+				$.ajax({
+					url: "{{ url('/insertsubcategory') }}",
+					method: 'POST',
+					data: formData,
+					contentType: false,
+					processData: false,
+					success: function(result) {
+						Swal.fire(
+							status,
+							'Your Category has been  Add',
+							'success'
+						)
+						jQuery.ajax({
+							url: "{{ url('/tableData') }}",
+							method: 'GET',
+							success: function(result) {
+								$("tbody").html(result)
+							}
+						});
+					},
+					error: function(result) {
+						Swal.fire(
+							status,
+							'This Category Aleady Exist',
+							'error'
+						)
+					}
+				});
+			}
+		});
+
+		$("#category_image").change((event) => {
+			blah.src = ''
+			var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+			if (!allowedExtensions.exec($("#category_image").val())) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please Select Vaild File!',
+				})
+				$("#category_image").val('')
+				return false;
+			} else {
+				$("#blah").show()
+				blah.src = URL.createObjectURL(event.target.files[0]);
+			}
+		})
 	</script>
 </body>
+
 </html>
