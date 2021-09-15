@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="en">
-<!--<![endif]-->
 
 <head>
 	<meta charset="utf-8">
@@ -114,12 +113,40 @@
 			</div>
 		</div>
 	</div>
+
+
+	<!-- Delete -->
+
+	<div class="modal fade" id="Delete" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="staticBackdropLabel">Category Delete</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form_delete" method="">
+						<div class="mb-3">
+							<label for="Edit_category_name" class="col-form-label">Remark:</label>
+							<input type="text" class="form-control" name="remark" id="remark">
+						</div>
+
+						<input type="hidden" value="" name="delete_category_id" id="delete_category_id">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" id="delete" class="btn btn-primary" data-bs-dismiss="modal">Delete</button>
+				</div>
+			</div>
+		</div>
 	</div>
+
+
+
 	@include('scrpit')
 
 	<script>
-		var table = $('#category_table').DataTable({})
-
 		$(document).ready(() => {
 			$("#blah").hide();
 			$.ajaxSetup({
@@ -139,7 +166,7 @@
 			$("input").attr("required", "true");
 		})
 		$("#insert").click(() => {
-			if (($("#category-name").val() == '') && ($("#category_image").get(0).files.length === 0)) {
+			if (($("#category-name").val() === '') || ($("#category_image").get(0).files.length === 0)) {
 
 				Swal.fire({
 					icon: 'error',
@@ -168,6 +195,13 @@
 								$("tbody").html(result)
 							}
 						});
+					},
+					error: function(result) {
+						Swal.fire(
+							status,
+							'This Category Aleady Exist',
+							'error'
+						)
 					}
 				});
 			}
@@ -181,16 +215,80 @@
 				contentType: false,
 				processData: false,
 				success: function(result) {
-					//console.log(result);
+
 				}
 			});
 		});
 		$("#category_image").change((event) => {
+			blah.src = ''
+			var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+			if (!allowedExtensions.exec($("#category_image").val())) {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please Select Vaild File!',
+				})
+				$("#category_image").val('')
+				return false;
+			} else {
+				$("#blah").show()
+				blah.src = URL.createObjectURL(event.target.files[0]);
+			}
+		})
+	</script>
 
-			
-			$("#blah").show()
-			blah.src = URL.createObjectURL(event.target.files[0]);
+	<script>
+		$("#delete").click(() => {
+			if ($("#remark").val() === '') {
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops...',
+					text: 'Please Enter Remark!',
+				})
+			} else {
+				Swal.fire({
+					title: 'Are you sure want to Delete ?',
+					icon: 'warning',
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: 'Yes, Delete it!'
+				}).then((result) => {
+					if (result.isConfirmed) {
+						$.ajax({
+							url: "{{ url('/edit2') }}",
+							method: 'POST',
+							data: {
+								remark: $("#remark").val(),
+								id: $("#delete_category_id").val()
+							},
+							success: function(result) {
+								Swal.fire(
+									status,
+									'Your Category has been Deleted .',
+									'success'
+								)
+								jQuery.ajax({
+									url: "{{ url('/ajaxRequest') }}",
+									method: 'GET',
+									success: function(result) {
+										$("tbody").html(result)
+									}
+								});
+							},
+							error: function(result) {
+								Swal.fire(
+									status,
+									  "Please Delete before SubCategory",
+									'error'
+								)
+							}
+						});
+					}
+				})
+			}
 		})
 	</script>
 </body>
+
 </html>
