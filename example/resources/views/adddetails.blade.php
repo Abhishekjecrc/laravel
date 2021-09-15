@@ -73,10 +73,12 @@
                                     <div class="col-md-3">
                                         <label>Size Group : </label>
                                         <select name="size_group" class="form-control">
-                                         <option selected disabled>Select Size</option>
-                                        
+                                            <option selected disabled>Select Size</option>
+                                            @foreach($size as $size)
+                                            <option value="{{$size->id}}">{{$size->size}}</option>
+                                            @endforeach
                                         </select>
-                                         
+
                                         <span style="color:red">@error('gender'){{$message}}@enderror </span>
                                     </div>
                                     <div class="col-md-3">
@@ -113,6 +115,13 @@
                                         <span style="color:red">@error('description'){{$message}}@enderror </span>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label>Images </label>
+                                        <input type="file" id="files" name="files[]" class="form-control" multiple="multiple" />
+                                        <span style="color:red">@error('files'){{$message}}@enderror </span>
+                                    </div>
+                                </div>
                                 <br>
                                 <div class="row">
                                     <div class="col-md-3">
@@ -127,5 +136,16 @@
             </div><!-- .animated -->
         </div>
         @include('scrpit')
+
+        <script>
+            $("#files").change(() => {
+               var length =  $('#files').get(0).files.length;
+               if(length>5  ){
+                   alert("Please Select Maxmiun 5 Image ")
+                   $("#files").val('');
+               }
+            })
+        </script>
 </body>
+
 </html>

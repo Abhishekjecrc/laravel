@@ -196,7 +196,6 @@
 
 		$("#insert").click(() => {
 			if (($("#category-name").val() === '') || ($("#category_image").get(0).files.length === 0) || ($("#fetch_category").val() === null)) {
-
 				Swal.fire({
 					icon: 'error',
 					title: 'Oops...',
@@ -254,5 +253,4 @@
 		})
 	</script>
 </body>
-
 </html>

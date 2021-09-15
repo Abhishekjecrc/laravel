@@ -16,7 +16,6 @@ class CategoryController extends Controller
         }
         public function ajaxRequest()
         {
-
                 $cat = DB::table('catrgory')->where('status', '!=', 'Deleted')->get();
                 return view('table', compact("cat"));
         }
@@ -34,7 +33,6 @@ class CategoryController extends Controller
         }
         public function ajaxEdit(Request $req)
         {
-
                 echo "<pre>";
                 print_r($_POST);
                 echo "<pre>";
@@ -44,7 +42,6 @@ class CategoryController extends Controller
 
         public function ajaxInsert(Request $req)
         {
-
                 $categoryName =  $req['category-name'];
                 $file =  $req->file('image');
                 $catrgory = new catrgory;
@@ -75,3 +72,4 @@ class CategoryController extends Controller
                 }
         }
 }
+
